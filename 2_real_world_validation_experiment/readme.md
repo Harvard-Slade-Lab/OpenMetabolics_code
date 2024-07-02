@@ -1,7 +1,7 @@
 # Validation Dataset and Visualization During Real-World Walking Experiments
 
 ## overview
-This folder contains the dataset of one representative participant who performed real-world walking experiments. The participant's folder includes:
+This folder contains the dataset of 28 participants who performed real-world walking experiments. The participant's folder includes:
 
 ## data description
 1. **Thigh motion data**: Captured using an IMU attached to the thigh, providing 3-axis angular velocity (rad/s) and linear acceleration (g).

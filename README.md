@@ -12,9 +12,9 @@ The repository is organized into three main folders:
 
 2. **Visualization of real-world walking experiment results**:
    - This folder includes scripts for loading, processing, and visualizing data from real-world walking experiments using OpenMetabolics and other activity monitors including pedometer, heart rate model, and smartwatch.
-   - The `validation_dataset` folder contains dataset of one representative participant.
+   - The `validation_dataset` folder contains dataset of 28 participants.
    - For OpenMetabolics' estimation, the code performs gait segmentation by peak detection, discretizes segmented data, extracts statistical features, and estimates energy expenditure using a pre-trained data-driven estimation model.
-   - The code generates raw estimate results from various methods and saves them in the `indiv_plot` folder.
+   - The code generates raw energy expenditure estimate results from various methods and saves them in the `indiv_plot` folder.
    - The overall results of the real-world walking experiments are saved as a box plot in the `validation_dataset` folder.
 
 3. **OpenMetabolics' pipeline code for a week-long monitoring study**:

@@ -12,7 +12,7 @@ This folder contains the dataset of 28 participants who performed real-world wal
 
 Each CSV file is loaded and processed to estimate energy expenditure using various energy expenditure estimation methods.
 
-The validation results folder includes the overall absolute error of each activity monitor and result plots of individual participants (n=28). Due to limited space, we included only one representative participant's dataset.
+The validation results folder includes the overall absolute error of each activity monitor and result plots of individual participants (n=28).
 
 ## usage
 To run the code, execute the `main.py` script:

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2024 Harvard Ability lab
+Copyright (c) 2025 Harvard Ability lab
 Title: "A smartphone activity monitor that accurately estimates energy expenditure"
 """
 

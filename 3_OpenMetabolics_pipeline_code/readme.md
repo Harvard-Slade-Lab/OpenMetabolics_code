@@ -13,7 +13,7 @@ Note: Due to the limited size of GitHub, we uploaded a certain portion of one da
 
 ## Pipeline code
 The energy expenditure estimation pipeline code is composed of seven key steps:
-1. **Bout detection**: Identifying the active phase based on leg motion.
+1. **Bout Detection**: Identifying active phases based on the norm of gyroscopic data.
 2. **Orientation alignment**: Converting the phone's orientation to match that of the thigh.
 3. **Gait segmentation**: Segmenting the data into individual gait cycles.
 4. **Preprocessing**: Discretizing data from a single gait cycle.

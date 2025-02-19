@@ -12,7 +12,7 @@ from scipy import signal
 from scipy.linalg import norm
 import utils
 
-# Load subject information from CSV
+# Load subject information from a CSV file
 subj_csv = pd.read_csv('./subject_info.csv')
 target_subj = 'S1'
 subj_info = {
@@ -23,8 +23,8 @@ subj_info = {
     'age': subj_csv.loc[subj_csv['subject'] == target_subj, 'age'].values[0]
 }
 
-# Compute the basal metabolic rate
-stand_aug_fact = 1.41
+# Compute the basal metabolic 
+stand_aug_fact = 1.41  # Standing augmentation factor
 height = subj_info['height']
 weight = subj_info['weight']
 age = subj_info['age']
@@ -39,7 +39,7 @@ pocket_motion_correction_model = pickle.load(open('./model_weight/pocket_motion_
 csv_path = './example_data/daily_sp_pocket_data.csv'
 df_sp = pd.read_csv(csv_path).values
 
-# Constants for low-pass filter
+# Constants for the low-pass filter
 sampling_freq = 50  # Sampling frequency in Hz
 cutoff_freq = 6  # Crossover frequency for low-pass filter in Hz
 filt_order = 4  # Filter order
@@ -48,11 +48,11 @@ filt_order = 4  # Filter order
 sliding_win = 200  # Window size for sliding window in samples (4 seconds at 50Hz)
 gyro_norm_thres = 0.5  # Threshold for gyro norm in rad/s
 
-# Low-pass filter parameters
+# Define low-pass filter parameters
 b, a = signal.butter(filt_order, cutoff_freq, btype='low', fs=sampling_freq)
 
 # Filter the collected smartphone data
-time_sp = df_sp[:, 0]  # Time
+time_sp = df_sp[:, 0]  # Time data
 gyro_sp = df_sp[:, 1:4]  # Gyroscope data
 acc_sp = df_sp[:, 4:]  # Accelerometer data
 
@@ -73,7 +73,7 @@ while start_idx + sliding_win <= n_samples:
     l2_norm_gyro = np.linalg.norm(cur_pocket_gyro)
 
     if l2_norm_gyro > gyro_norm_thres:
-        # Low-pass filter current window signals
+        # Apply a low-pass filter to the current window signals
         cur_pocket_gyro = signal.filtfilt(b, a, cur_pocket_gyro, axis=0)
         cur_pocket_acc = signal.filtfilt(b, a, cur_pocket_acc, axis=0)
 
@@ -100,7 +100,7 @@ while start_idx + sliding_win <= n_samples:
             avg_gait_data_pocket = np.mean(gait_data_pocket, axis=0)
             opt_rotm_y_pocket, theta_y = utils.get_rotate_y(avg_gait_data_pocket, prin_idx_pocket)
             opt_rotm_pocket = np.matmul(opt_rotm_z_pocket, opt_rotm_y_pocket)
-            cur_pocket_gyro_cal = np.matmul(cur_pocket_gyro, opt_rotm_pocket)
+            cur_pocket_gyro_cal = np.matmul(cur_pocket_gyro, opt_rotm_pocket) 
 
             # Adjust rotation if necessary
             # If the observed positive peaks are smaller than negative peaks, rotate along y-axis of 180 degrees
@@ -129,9 +129,11 @@ while start_idx + sliding_win <= n_samples:
                 time_all.append(cur_ee_time)
                 ee_all.append(cur_ee_est)
         else:
+            # If it's not a detectable bout, assign basal rate
             time_all.append(np.median(cur_window_time))
             ee_all.append(cur_basal)
     else:
+        # If no movement is detected, assign basal rate
         time_all.append(np.median(cur_window_time))
         ee_all.append(cur_basal)
 
@@ -141,8 +143,8 @@ while start_idx + sliding_win <= n_samples:
 # Plot the energy expenditure over time
 fig, ax = plt.subplots(figsize=[10, 4])
 
-# Plot the energy expenditure data with dodgerblue color
-plt.plot(time_all, ee_all, marker='o', linestyle='', color='dodgerblue', label= 'Estimated\nenergy expenditure')
+# Plot the energy expenditure data with a specific color and marker
+plt.plot(time_all, ee_all, marker='o', linestyle='', color='dodgerblue', label='Estimated\nenergy expenditure')
 
 # Add a horizontal grey dotted line representing the basal rate
 plt.axhline(y=cur_basal, color='grey', linestyle='--', alpha=0.5, linewidth=2, label='Basal Rate')
@@ -159,3 +161,8 @@ plt.legend(frameon=False)
 # Display the plot
 plt.show()
 
+# Save the plot
+output_dir = './example_plot'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+plt.savefig(os.path.join(output_dir, 'energy_expenditure_plot.png'))

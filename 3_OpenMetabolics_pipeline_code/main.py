@@ -144,7 +144,7 @@ while start_idx + sliding_win <= n_samples:
 fig, ax = plt.subplots(figsize=[10, 4])
 
 # Plot the energy expenditure data with a specific color and marker
-plt.plot(time_all, ee_all, marker='o', linestyle='', color='dodgerblue', label='Estimated\nenergy expenditure')
+plt.plot(time_all, ee_all, marker='o', linestyle='', alpha=0.5, color='dodgerblue', label='Estimated\nenergy expenditure')
 
 # Add a horizontal grey dotted line representing the basal rate
 plt.axhline(y=cur_basal, color='grey', linestyle='--', alpha=0.5, linewidth=2, label='Basal Rate')
@@ -158,11 +158,12 @@ ax.spines['right'].set_color('none')
 # Add legend to identify the basal rate line
 plt.legend(frameon=False)
 
-# Display the plot
-plt.show()
-
 # Save the plot
 output_dir = './example_plot'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 plt.savefig(os.path.join(output_dir, 'energy_expenditure_plot.png'), dpi=300)
+
+# Display the plot
+plt.show()
+

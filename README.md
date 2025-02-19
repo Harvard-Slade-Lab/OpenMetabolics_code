@@ -30,4 +30,4 @@ We will release the OpenMetabolics smartphone application on the app store and a
 To run the code provided in this repository, ensure you have the following packages installed with the specified versions:
 
 ```bash
-pip install numpy==1.23.5 pandas==1.5.3 scipy==1.10.1 matplotlib==3.7.1 scikit-learn==1.1.2 xgboost==1.7.6
+pip install matplotlib==3.10.0 numpy==2.2.3 pandas==1.3.5 scikit-learn==1.0.2 scipy==1.15.2 xgboost==1.7.6

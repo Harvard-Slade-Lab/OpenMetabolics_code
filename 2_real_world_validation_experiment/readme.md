@@ -4,7 +4,7 @@
 This folder contains the dataset of 28 participants who performed real-world walking experiments. The participant's folder includes:
 
 ## data description
-1. **Thigh motion data**: Captured using an IMU attached to the thigh, providing 3-axis angular velocity (rad/s) and linear acceleration (g).
+1. **Thigh motion data**: Captured using an IMU attached to the thigh, providing 3-axis angular velocity (rad/s) and linear acceleration (m/s^2).
 2. **Smartwatch energy expenditure estimates**: Provided in Watts.
 3. **Ground-truth respirometry data**: Recorded per breath and converted into Watts.
 4. **Heart rate data**: Measured in beats per minute (bpm).
